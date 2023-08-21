@@ -26,7 +26,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Navbar currentUser={currentUser} />
         <ModalProvider />
-        {children}
+        <main className="pb-20 pt-28">{children}</main>
         <Toaster />
       </body>
     </html>

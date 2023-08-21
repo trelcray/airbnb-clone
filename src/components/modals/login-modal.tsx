@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { IoMdCheckmarkCircle, IoMdCloseCircle } from "react-icons/io";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
@@ -20,9 +19,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Heading from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
 import { useLoginModal } from "@/hooks/use-login-modal";
+import { useRegisterModal } from "@/hooks/use-register-modal";
 import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
@@ -36,6 +37,12 @@ export const LoginModal = () => {
   const { toast } = useToast();
   const router = useRouter();
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
+
+  const toggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,33 +61,13 @@ export const LoginModal = () => {
       setIsLoading(false);
 
       if (callback?.ok) {
-        toast({
-          description: (
-            <div className="flex gap-1">
-              <IoMdCheckmarkCircle
-                size={20}
-                className="mt-[0.05rem] text-emerald-500"
-              />
-              <p className="font-semibold">Logged In</p>
-            </div>
-          ),
-        });
+        toast({ title: "Logged In" });
         router.refresh();
         loginModal.onClose();
       }
 
       if (callback?.error) {
-        toast({
-          description: (
-            <div className="flex gap-1">
-              <IoMdCloseCircle
-                size={20}
-                className="mt-[0.05rem] text-rose-500"
-              />
-              <p className="font-semibold">{callback.error}</p>
-            </div>
-          ),
-        });
+        toast({ title: callback.error, isError: true });
       }
     });
   };
@@ -107,12 +94,12 @@ export const LoginModal = () => {
           className="flex flex-row items-center justify-center gap-2 
           text-center"
         >
-          <p>Already have an account?</p>
+          <p>First time using airbnb?</p>
           <p
-            onClick={loginModal.onClose}
+            onClick={toggle}
             className="cursor-pointer text-neutral-800 hover:underline"
           >
-            Log in
+            Create an account
           </p>
         </div>
       </div>
@@ -131,8 +118,7 @@ export const LoginModal = () => {
     >
       <div>
         <div className="py-2">
-          <h1 className="text-2xl font-bold">Welcome back</h1>
-          <p className="font-light text-neutral-500">Login to your account!</p>
+          <Heading title="Welcome back" subtitle="Login to your account" />
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}

@@ -1,7 +1,8 @@
-import { Container } from "@/components/single/container";
-import { Logo } from "@/components/single/logo";
-import { Search } from "@/components/single/search";
-import { UserMenu } from "@/components/single/user-menu";
+import { Categories } from "@/components/categories/categories";
+import { Logo } from "@/components/logo";
+import { Search } from "@/components/search";
+import { Container } from "@/components/ui/container";
+import { UserMenu } from "@/components/user-menu";
 import { SafeUser } from "@/types";
 
 interface INavbarProps {
@@ -23,6 +24,7 @@ export const Navbar: React.FC<INavbarProps> = ({ currentUser }) => {
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   );
 };

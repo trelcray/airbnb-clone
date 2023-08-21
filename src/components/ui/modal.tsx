@@ -64,7 +64,7 @@ export const Modal: React.FC<IModalProps> = ({
 
   return (
     <div>
-      <Dialog open={isOpen} onOpenChange={onChange}>
+      <Dialog modal open={isOpen} onOpenChange={onChange}>
         <DialogContent>
           <DialogHeader className="border-b">
             <DialogTitle>{title}</DialogTitle>
@@ -72,9 +72,10 @@ export const Modal: React.FC<IModalProps> = ({
           </DialogHeader>
           <div className="relative flex-auto px-6">{children}</div>
           <DialogFooter className="flex-col gap-2 p-6">
-            <div className="flex w-full flex-col items-center gap-4">
+            <div className="flex w-full flex-row items-center gap-4">
               {secondaryAction && secondaryActionLabel && (
                 <Button
+                  className="w-full"
                   disabled={disabled}
                   onClick={handleSecondaryAction}
                   variant="outline"
@@ -89,8 +90,8 @@ export const Modal: React.FC<IModalProps> = ({
               >
                 {actionLabel}
               </Button>
-              {footer}
             </div>
+            {footer}
           </DialogFooter>
         </DialogContent>
       </Dialog>

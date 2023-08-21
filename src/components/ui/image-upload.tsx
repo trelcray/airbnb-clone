@@ -1,6 +1,8 @@
 import React, { FormEvent, useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { FiUploadCloud } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
+import { TbPhotoPlus } from "react-icons/tb";
 
 import Image from "next/image";
 
@@ -9,7 +11,6 @@ import { Button } from "./button";
 interface IImageUploadProps {
   className: string;
   onChange: (value: string) => void;
-  value: string;
 }
 
 interface IFile extends File {
@@ -19,7 +20,6 @@ interface IFile extends File {
 export const ImageUpload: React.FC<IImageUploadProps> = ({
   className,
   onChange,
-  value,
 }) => {
   const [files, setFiles] = useState<IFile[]>([]);
 
@@ -33,10 +33,6 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
     }
   }, []);
 
-  const handleRemoveFile = (name: string) => {
-    setFiles((files) => files.filter((file) => file.name !== name));
-  };
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
       "image/*": [],
@@ -45,6 +41,15 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
     maxSize: 1024 * 1024 * 2, // limited to 2mb
     onDrop,
   });
+
+  const handleRemoveFile = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    name: string
+  ) => {
+    e.stopPropagation();
+
+    setFiles((files) => files.filter((file) => file.name !== name));
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -67,7 +72,7 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
       <div
         {...getRootProps({
           className,
@@ -77,50 +82,38 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
         {isDragActive ? (
           <p>Drop the file here...</p>
         ) : (
-          <p>Arraste e solte uma imagem aqui, ou clique para selecionar.</p>
+          <>
+            <TbPhotoPlus size={50} />
+            <p className="text-lg font-semibold">Click to load the image</p>
+          </>
         )}
-      </div>
-      {/* Preview */}
-      <section className="mt-10">
-        <div className="flex gap-4">
-          <h2 className="title text-3xl font-semibold">Preview</h2>
-          <Button type="submit">Upload</Button>
-        </div>
-        {/* Accepted files */}
-        <h3 className="title mt-10 border-b pb-3 text-lg font-semibold text-stone-600">
-          Accepted Files
-        </h3>
-        <ul className="mt-6 flex">
-          {files.map((file) => (
-            <li
+        {files.map((file) => (
+          <>
+            <Image
               key={file.name}
-              className="relative h-32 w-full rounded-md shadow-lg"
+              fill
+              src={file.preview}
+              alt={file.name}
+              className="pointer-events-none w-full rounded-md object-cover"
+              onLoad={() => {
+                URL.revokeObjectURL(file.preview);
+              }}
+            />
+            <Button
+              size="none"
+              variant="ghost"
+              className="absolute -right-2 -top-2 rounded-full"
+              onClick={(e) => handleRemoveFile(e, file.name)}
             >
-              <Image
-                src={value}
-                alt={file.name}
-                width={100}
-                height={100}
-                onLoad={() => {
-                  URL.revokeObjectURL(file.preview);
-                }}
-                className="h-full w-full rounded-md object-contain"
-              />
-              <Button
-                size="none"
-                variant="ghost"
-                className="absolute -right-3 -top-3 rounded-full"
-                onClick={() => handleRemoveFile(file.name)}
-              >
-                <IoCloseCircle className="h-7 w-7 text-rose-500" />
-              </Button>
-              <p className="mt-2 text-[12px] font-medium text-stone-500">
-                {file.name}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
+              <IoCloseCircle className="h-7 w-7 text-rose-500" />
+            </Button>
+          </>
+        ))}
+      </div>
+      <Button type="submit" className="gap-2 bg-emerald-700">
+        <FiUploadCloud size={18} className="mt-[0.08rem]" />
+        Upload Image
+      </Button>
     </form>
   );
 };

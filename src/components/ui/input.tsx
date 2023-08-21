@@ -6,16 +6,22 @@ import { cn } from "@/lib/utils";
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   isError: FieldErrors;
+  formatPrice?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, isError, id, ...props }, ref) => {
+  ({ className, type, isError, id, formatPrice, ...props }, ref) => {
     return (
       <input
         type={type}
         className={cn(
-          "peer flex h-10 w-full rounded-md border-2 border-input bg-background p-4 pt-6 text-sm ring-offset-background transition file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+          "peer flex h-10 w-full rounded-md border-2 border-input bg-background",
+          "p-4 pt-6 text-sm ring-offset-background transition file:border-0",
+          "file:bg-transparent file:text-sm file:font-medium",
+          "placeholder:text-muted-foreground focus-visible:outline-none",
+          "disabled:cursor-not-allowed disabled:opacity-50",
           { "border-rose-500": isError[id as string] },
+          { "pl-6": formatPrice },
           className
         )}
         ref={ref}

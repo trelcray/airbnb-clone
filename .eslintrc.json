@@ -15,7 +15,10 @@
   ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "ecmaVersion": "latest",
@@ -24,25 +27,38 @@
       }
     }
   ],
-  "plugins": ["@typescript-eslint", "prettier", "tailwindcss"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "tailwindcss"
+  ],
   "settings": {
     "react": {
       "version": "detect"
     },
     "tailwindcss": {
-      "callees": ["cn"],
+      "callees": [
+        "cn"
+      ],
       "config": "tailwind.config.ts"
     }
   },
   "rules": {
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
-    "no-console": "error",
     "tailwindcss/no-custom-classname": "off",
-    "tailwindcss/classnames-order": "error",
-    "linebreak-style": ["error", "unix"],
-    "camelcase": "error",
-    "quotes": ["error", "double"],
-    "semi": ["error", "always"]
+    "tailwindcss/classnames-order": "warn",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ]
   }
 }

@@ -1,8 +1,10 @@
 "use client";
 
+import { useCallback } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -14,6 +16,7 @@ import {
 } from "@/components/ui/menubar";
 import { useLoginModal } from "@/hooks/use-login-modal";
 import { useRegisterModal } from "@/hooks/use-register-modal";
+import { useRentModal } from "@/hooks/use-rent-modal";
 import { SafeUser } from "@/types";
 
 interface IUserMenuProps {
@@ -21,18 +24,29 @@ interface IUserMenuProps {
 }
 
 export const UserMenu: React.FC<IUserMenuProps> = ({ currentUser }) => {
+  const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
+
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
+
   return (
     <div>
       <div className="flex items-center gap-3">
-        <div
-          onClick={() => {}}
+        <span
+          onClick={onRent}
           className="hidden cursor-pointer rounded-full px-4 py-3 text-sm 
           font-semibold transition hover:bg-neutral-100 md:block"
         >
           Airbnb your home
-        </div>
+        </span>
         <Menubar>
           <MenubarMenu>
             <MenubarTrigger
@@ -62,31 +76,31 @@ export const UserMenu: React.FC<IUserMenuProps> = ({ currentUser }) => {
               {currentUser ? (
                 <>
                   <MenubarItem
-                    onClick={() => {}}
+                    onClick={() => router.push("/trips")}
                     className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
                   >
                     My trips
                   </MenubarItem>
                   <MenubarItem
-                    onClick={() => {}}
+                    onClick={() => router.push("/favorites")}
                     className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
                   >
                     My favorites
                   </MenubarItem>
                   <MenubarItem
-                    onClick={() => {}}
+                    onClick={() => router.push("/reservations")}
                     className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
                   >
                     My Reservations
                   </MenubarItem>
                   <MenubarItem
-                    onClick={() => {}}
+                    onClick={() => router.push("/properties")}
                     className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
                   >
                     My Properties
                   </MenubarItem>
                   <MenubarItem
-                    onClick={() => {}}
+                    onClick={rentModal.onOpen}
                     className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
                   >
                     Airbnb my home
