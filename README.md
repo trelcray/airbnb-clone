@@ -1,34 +1,226 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Full Stack Airbnb Clone with Next.js 13.4
 
-## Getting Started
+## Table of contents
 
-First, run the development server:
+- [Overview](#overview)
+  - [Screencast](#screencast)
+  - [Links](#links)
+  - [Getting started](#getting-started)
+- [My process](#my-process)
+    - [Decisions](#decisions)
+  - [Organization](#organization)
+  - [Built with](#built-with)
+  - [Continued Development](#continued-development)
+  - [What I learned](#what-i-learned)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+
+## Overview
+
+This is a repository for a Full Stack Airbnb Clone with Next.js 13 App Router: React, Tailwind, Prisma, MongoDB, NextAuth.
+
+#### Design
+
+    ✓ Ensured responsiveness on devices with widths ranging from 320px to 1920px, in both portrait and landscape orientations.
+    ✓ Proper application of fonts, colors, sizes, spacing, illustrations, icons, text, and images.
+    ✓ Appropriate behavior of buttons and links on hover or when receiving focus.
+    ✓ Smooth animations during state transitions.
+    ✓ Image gallery with responsive behavior.
+    ✓ Adaptable and fluid text and spacing.
+
+#### Feactures
+
+- [x] Full responsiveness
+- [x] Credential authentication
+- [x] Google and Github authentication
+- [x] Image upload using Cloudinary CDN
+- [x] Client form validation and handling using react-hook-form
+- [x] Server error handling using radix UI toast
+- [x] Calendars with react-date-range
+- [x] Page loading state
+- [x] Page empty state
+- [x] Booking / Reservation system
+- [x] Guest reservation cancellation
+- [x] Owner reservation cancellation
+- [x] Creation and deletion of properties
+- [x] Pricing calculation
+- [x] Advanced search algorithm by category, date range, map location, number of guests, rooms and bathrooms
+- [x] Favorites system
+- [x] Shareable URL filters
+- [ ] Edit properties
+- [ ] Edit profile
+- [ ] Automated testing
+- [ ] Not found page
+
+### Screencast
+
+![App preview](./screenshots/screencast.gif)
+
+### Links
+
+- [Remote repository](https://github.com/trelcray/airbnb-clone)
+
+- [Live preview](https://trelcray-airbnb-clone.vercel.app)
+
+### Getting started
+
+You can use the application available at the live preview URL above. However, if you want to build it on your machine:
+
+#### Prerequisites
+
+Make sure your machine has Node 18+ installed and the package manager npm.
+
+Make sure you have installed the ESlint extension.
+
+#### Installation
+
+Clone the project repository to your machine.
+
+Using HTTPS:
+```bash
+https://github.com/trelcray/airbnb-clone.git
+```
+
+Using GitHub CLI:
+```bash
+gh repo clone trelcray/airbnb-clone
+```
+
+Navigate to the newly downloaded directory.
+
+```bash
+cd airbnb-clone
+```
+
+Install the project dependencies using npm or an of your preference:
+
+```bash
+npm install
+```
+
+### Setup .env file
+
+```bash
+DATABASE_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_ID=
+GITHUB_SECRET=
+NEXTAUTH_SECRET=
+```
+
+#### Development
+
+To run the project in development mode, execute the command:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will start the development server at http://localhost:3000. Open your browser and paste the address to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To build the project for production, execute the command:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+This will generate an optimized and minified version of the application in the .next folder.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Running in Production Mode
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+After building the project, you can start a production mode server by executing the command:
 
-## Deploy on Vercel
+```bash
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This will start the production server at the same address http://localhost:3000. Open your browser and paste the address to view the optimized application.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## My process
+
+### Decisions
+
+Firstly, I analyzed the project scope and its requirements. After a careful evaluation, I decided on the technologies to use and created the initial project setup, incorporating everything I had planned to utilize.
+
+After that, I began developing the components and the static part of the application. Subsequently, I implemented the required functionalities. After completing this phase, I introduced integration with the API and performed refactorings to ensure code quality.
+
+Finally, I deployed the application and analyzed the SEO, making necessary changes to enhance search engine optimization.
+
+### Organization
+
+Next.js is a framework that has its own folder structure standard, which underwent a significant change in version 13.4. In my project, I faithfully follow these standards and use the "src" folder to contain project-specific files. Additionally, I choose to separate files according to their responsibilities into folders that make their functionalities explicit.
+
+### Built with
+
+#### Technologies, libraries, and tools
+
+- TypeScript
+- React.js
+- Next.js
+- Prisma
+- Next-auth
+- Radix UI
+- React-hook-form
+- Zod
+- Tailwind CSS
+- Clsx
+- Tailwind-merge
+- Class-variance-authority
+- Axios
+- Zustand
+- Husky
+- Prettier
+- ESlint
+- React-icons
+- Date-fns
+- World-countries
+- Leaflet
+- Query-string
+
+#### Techniques, concepts and more
+
+- Mobile-first workflow
+- Semantic HTML5 markup
+- Flexbox / Grid
+- SSR / CSR / SSG
+- Hoc / Render Props
+- Preload / Prefetch
+- Provider
+
+### Continued development
+
+1. Unit, Integration, and E2E tests.
+
+2. Edit the properties.
+
+3. Edit user profile. 
+
+### What I learned
+
+1. How to reuse components in a more comprehensive way.
+
+2. How to properly use modals and toasts, using providers.
+
+3. Creating dynamic SEO.
+
+4. How to perform authentication with Next-Auth.
+
+### Useful resources
+
+1. [Images Optmization](https://tinypng.com/)
+
+2. [Icons SEO converter](https://favicon.io/favicon-converter/)
+
+## Author
+
+- GitHub - [trelcray](https://github.com/trelcray)
+
+- LinkedIn - [Thalis Zambarda](https://www.linkedin.com/in/thalis-zambarda/)
+
+## Acknowledgments
+
+I thank [Antonio](https://github.com/AntonioErdeljac) for sharing his knowledge non-profitably and for sharing amazing open-source projects.
