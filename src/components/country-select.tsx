@@ -3,14 +3,7 @@
 import Select from "react-select";
 
 import { useCountries } from "@/hooks/use-countries";
-
-export interface ICountrySelectValueProps {
-  flag: string;
-  label: string;
-  latlng: number[];
-  region: string;
-  value: string;
-}
+import { ICountrySelectValueProps } from "@/types";
 
 interface CountrySelectProps {
   value?: ICountrySelectValueProps;

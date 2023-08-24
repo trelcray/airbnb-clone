@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { HeartButton } from "@/components/heart-button";
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { useCountries } from "@/hooks/use-countries";
 import { SafeUser } from "@/types";
 

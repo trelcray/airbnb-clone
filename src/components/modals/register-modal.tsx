@@ -19,7 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
 import { useLoginModal } from "@/hooks/use-login-modal";

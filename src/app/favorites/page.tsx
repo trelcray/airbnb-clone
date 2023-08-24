@@ -1,8 +1,20 @@
+import { Metadata } from "next";
+
 import getCurrentUser from "@/actions/get-current-user";
 import { getFavoriteListings } from "@/actions/get-favorite-listings";
 import { EmptyState } from "@/components/ui/empty-state";
 
 import { FavoritesClient } from "./favorites-client";
+
+export const metadata: Metadata = {
+  title: "Favorites",
+  description: "Your favorites airbnb",
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+  },
+};
 
 export default async function Favorites() {
   const currentUser = await getCurrentUser();

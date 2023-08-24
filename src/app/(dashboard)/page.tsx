@@ -1,8 +1,12 @@
 import getCurrentUser from "@/actions/get-current-user";
-import { IListingParams, getListings } from "@/actions/get-listings";
+import { getListings } from "@/actions/get-listings";
 import { ListingCard } from "@/components/listings/listing-card";
 import { Container } from "@/components/ui/container";
 import { EmptyState } from "@/components/ui/empty-state";
+import { IListingParams } from "@/types";
+
+//https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
+export const dynamic = "force-dynamic";
 
 interface IHomeProps {
   searchParams: IListingParams;

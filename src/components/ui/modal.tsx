@@ -84,8 +84,9 @@ export const Modal: React.FC<IModalProps> = ({
                 </Button>
               )}
               <Button
-                className="w-full bg-rose-500"
+                className="w-full"
                 disabled={disabled}
+                isLoading={disabled}
                 onClick={handleSubmit}
               >
                 {actionLabel}

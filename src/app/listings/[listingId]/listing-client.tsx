@@ -7,13 +7,13 @@ import axios from "axios";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";
 
-import { categories } from "@/components/categories/categories";
 import { ListingHead } from "@/components/listings/listing-head";
 import { ListingInfo } from "@/components/listings/listing-info";
 import { ListingReservation } from "@/components/listings/listing-reservation";
 import { Container } from "@/components/ui/container";
 import { useLoginModal } from "@/hooks/use-login-modal";
 import { useToast } from "@/hooks/use-toast";
+import { categories } from "@/mocks/categories";
 import { SafeListing, SafeUser, safeReservations } from "@/types";
 
 const initialDateRange = {

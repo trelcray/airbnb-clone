@@ -22,3 +22,22 @@ export type SafeUser = Omit<
   updatedAt: string;
   emailVerified: string | null;
 };
+
+export interface IListingParams {
+  userId?: string;
+  guestCount?: number;
+  roomCount?: number;
+  bathroomCount?: number;
+  startDate?: string;
+  endDate?: string;
+  locationValue?: string;
+  category?: string;
+}
+
+export interface ICountrySelectValueProps {
+  flag: string;
+  label: string;
+  latlng: number[];
+  region: string;
+  value: string;
+}

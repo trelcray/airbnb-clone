@@ -3,6 +3,7 @@
 import { IconType } from "react-icons";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 import { ListingCategory } from "@/components/listings/listing-category";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -55,7 +56,16 @@ export const ListingInfo: React.FC<IListingInfoProps> = ({
               sizes="100vw"
               src={user?.image || "/images/placeholder.jpg"}
             />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>
+              <Image
+                height={30}
+                width={30}
+                alt="Avatar"
+                sizes="100vw"
+                src="/images/placeholder.jpg"
+                className="animate-pulse"
+              />
+            </AvatarFallback>
           </Avatar>
         </div>
         <div

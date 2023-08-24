@@ -26,7 +26,7 @@ export const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   }, [currentUser, listingId]);
 
   const toggleFavorite = useCallback(
-    async (e: React.MouseEvent<HTMLDivElement>) => {
+    async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.stopPropagation();
 
       if (!currentUser) {

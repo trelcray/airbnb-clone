@@ -4,7 +4,10 @@ import { FiUploadCloud } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 import { TbPhotoPlus } from "react-icons/tb";
 
+import axios from "axios";
 import Image from "next/image";
+
+import { useToast } from "@/hooks/use-toast";
 
 import { Button } from "./button";
 
@@ -22,6 +25,9 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
   onChange,
 }) => {
   const [files, setFiles] = useState<IFile[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { toast } = useToast();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles?.length) {
@@ -35,7 +41,7 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
-      "image/*": [],
+      "image/jpeg, image/jpg, image/png": [],
     },
     maxFiles: 1,
     maxSize: 1024 * 1024 * 2, // limited to 2mb
@@ -53,6 +59,7 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (!files.length) return;
 
@@ -63,12 +70,18 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
     formData.append("upload_preset", name);
 
     const URL = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL || "";
-    const data = await fetch(URL, {
-      method: "POST",
-      body: formData,
-    }).then((res) => res.json());
 
-    onChange(data.secure_url);
+    try {
+      const response = await axios.post(URL, formData);
+      const data = response.data;
+
+      onChange(data.secure_url);
+      toast({ title: "Success!" });
+    } catch (error) {
+      toast({ title: (error as Error).message, isError: true });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -110,7 +123,13 @@ export const ImageUpload: React.FC<IImageUploadProps> = ({
           </>
         ))}
       </div>
-      <Button type="submit" className="gap-2 bg-emerald-700">
+      <Button
+        disabled={isLoading}
+        isLoading={isLoading}
+        type="submit"
+        className="gap-2"
+        variant="secondary"
+      >
         <FiUploadCloud size={18} className="mt-[0.08rem]" />
         Upload Image
       </Button>

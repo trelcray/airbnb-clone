@@ -1,8 +1,20 @@
+import { Metadata } from "next";
+
 import getCurrentUser from "@/actions/get-current-user";
 import getReservations from "@/actions/get-reservations";
 import { EmptyState } from "@/components/ui/empty-state";
 
 import { TripsClient } from "./trips-client";
+
+export const metadata: Metadata = {
+  title: "Trips",
+  description: "Your trips airbnb",
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+  },
+};
 
 export default async function Trips() {
   const currentUser = await getCurrentUser();

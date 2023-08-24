@@ -42,8 +42,9 @@ export const ListingReservation: React.FC<IListingReservationProps> = ({
       <hr />
       <div className="p-4">
         <Button
-          className="w-full bg-rose-500"
+          className="w-full"
           disabled={disabled}
+          isLoading={disabled}
           onClick={onSubmit}
         >
           Reserve

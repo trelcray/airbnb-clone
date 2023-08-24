@@ -1,15 +1,5 @@
 import prisma from "@/lib/prismadb";
-
-export interface IListingParams {
-  userId?: string;
-  guestCount?: number;
-  roomCount?: number;
-  bathroomCount?: number;
-  startDate?: string;
-  endDate?: string;
-  locationValue?: string;
-  category?: string;
-}
+import { IListingParams } from "@/types";
 
 export async function getListings(params: IListingParams) {
   try {

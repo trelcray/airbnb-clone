@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { ListingCard } from "@/components/listings/listing-card";
 import { Container } from "@/components/ui/container";
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { useToast } from "@/hooks/use-toast";
 import { SafeUser, safeReservations } from "@/types";
 

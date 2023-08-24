@@ -1,5 +1,6 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
+import { Button } from "@/components/ui/button";
 import { useFavorite } from "@/hooks/use-favorites";
 import { cn } from "@/lib/utils";
 import { SafeUser } from "@/types";
@@ -19,9 +20,11 @@ export const HeartButton: React.FC<IHeartButtonProps> = ({
   });
 
   return (
-    <div
+    <Button
       onClick={toggleFavorite}
-      className="relative cursor-pointer transition hover:opacity-80"
+      size="none"
+      variant="ghost"
+      className="relative transition hover:bg-transparent hover:opacity-80"
     >
       <AiOutlineHeart
         size={28}
@@ -33,6 +36,6 @@ export const HeartButton: React.FC<IHeartButtonProps> = ({
           "fill-rose-500": hasFavorited,
         })}
       />
-    </div>
+    </Button>
   );
 };

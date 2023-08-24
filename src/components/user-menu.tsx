@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -50,9 +51,10 @@ export const UserMenu: React.FC<IUserMenuProps> = ({ currentUser }) => {
         <Menubar>
           <MenubarMenu>
             <MenubarTrigger
-              className="flex cursor-pointer flex-row items-center justify-between 
-              gap-3 rounded-full border-[1px] border-neutral-200 p-4 
-              transition hover:shadow-md md:px-2 md:py-1"
+              className="flex cursor-pointer flex-row items-center 
+              justify-between gap-3 rounded-full border-[1px] 
+              border-neutral-200 p-4 transition hover:shadow-md md:px-2 
+              md:py-1"
             >
               <GiHamburgerMenu className="h-4 w-4 text-slate-700" />
               <figure className="hidden md:block">
@@ -64,7 +66,16 @@ export const UserMenu: React.FC<IUserMenuProps> = ({ currentUser }) => {
                     sizes="100vw"
                     src={currentUser?.image || "/images/placeholder.jpg"}
                   />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>
+                    <Image
+                      height={30}
+                      width={30}
+                      alt="Avatar"
+                      sizes="100vw"
+                      src="/images/placeholder.jpg"
+                      className="animate-pulse"
+                    />
+                  </AvatarFallback>
                 </Avatar>
               </figure>
             </MenubarTrigger>
@@ -77,38 +88,44 @@ export const UserMenu: React.FC<IUserMenuProps> = ({ currentUser }) => {
                 <>
                   <MenubarItem
                     onClick={() => router.push("/trips")}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     My trips
                   </MenubarItem>
                   <MenubarItem
                     onClick={() => router.push("/favorites")}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     My favorites
                   </MenubarItem>
                   <MenubarItem
                     onClick={() => router.push("/reservations")}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     My Reservations
                   </MenubarItem>
                   <MenubarItem
                     onClick={() => router.push("/properties")}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     My Properties
                   </MenubarItem>
                   <MenubarItem
                     onClick={rentModal.onOpen}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     Airbnb my home
                   </MenubarItem>
                   <hr />
                   <MenubarItem
                     onClick={() => signOut()}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     Logout
                   </MenubarItem>
@@ -117,13 +134,15 @@ export const UserMenu: React.FC<IUserMenuProps> = ({ currentUser }) => {
                 <>
                   <MenubarItem
                     onClick={loginModal.onOpen}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     Login
                   </MenubarItem>
                   <MenubarItem
                     onClick={registerModal.onOpen}
-                    className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
+                    className="cursor-pointer px-4 py-3 font-semibold transition
+                    hover:bg-neutral-100"
                   >
                     Sign up
                   </MenubarItem>

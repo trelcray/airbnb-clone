@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { BiDollar } from "react-icons/bi";
 
@@ -8,29 +8,20 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 
-import { categories } from "@/components/categories/categories";
 import { CategoryInput } from "@/components/categories/category-input";
 import { Counter } from "@/components/counter";
-import {
-  CountrySelect,
-  ICountrySelectValueProps,
-} from "@/components/country-select";
-import Heading from "@/components/ui/heading";
+import { CountrySelect } from "@/components/country-select";
+import { Heading } from "@/components/ui/heading";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Modal } from "@/components/ui/modal";
 import { useRentModal } from "@/hooks/use-rent-modal";
 import { useToast } from "@/hooks/use-toast";
-
-enum STEPS {
-  CATEGORY = 0,
-  LOCATION = 1,
-  INFO = 2,
-  IMAGES = 3,
-  DESCRIPTION = 4,
-  PRICE = 5,
-}
+import { categories } from "@/mocks/categories";
+import { STEPS } from "@/mocks/enums";
+import { ICountrySelectValueProps } from "@/types";
+import { onlyNumbers } from "@/utils/mask";
 
 export const RentModal = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +46,7 @@ export const RentModal = () => {
       roomCount: 1,
       bathroomCount: 1,
       imageSrc: "",
-      price: 1,
+      price: "1",
       title: "",
       description: "",
     },
@@ -66,6 +57,7 @@ export const RentModal = () => {
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
+  const price = watch("price");
 
   const Map = useMemo(
     () =>
@@ -134,6 +126,10 @@ export const RentModal = () => {
 
     return "Back";
   }, [step]);
+
+  useEffect(() => {
+    setValue("price", onlyNumbers(price));
+  }, [price, setValue]);
 
   let bodyContent = (
     <div className="flex flex-col gap-8">
@@ -279,7 +275,6 @@ export const RentModal = () => {
           <Input
             id="price"
             formatPrice
-            type="number"
             disabled={isLoading}
             {...register("price", { required: true })}
             isError={errors}

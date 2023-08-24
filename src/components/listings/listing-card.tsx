@@ -98,8 +98,8 @@ export const ListingCard: React.FC<IListingCardProps> = ({
         </div>
         {onAction && actionLabel && (
           <Button
-            className="bg-rose-500"
             disabled={disabled}
+            isLoading={disabled}
             size="sm"
             onClick={handleCancel}
           >

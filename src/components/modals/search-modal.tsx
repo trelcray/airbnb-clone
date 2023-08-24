@@ -9,24 +9,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import qs, { StringifiableRecord } from "query-string";
 
 import { Counter } from "@/components/counter";
-import {
-  CountrySelect,
-  ICountrySelectValueProps,
-} from "@/components/country-select";
+import { CountrySelect } from "@/components/country-select";
 import { Calendar } from "@/components/ui/calendar";
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { Modal } from "@/components/ui/modal";
 import { useSearchModal } from "@/hooks/use-search-modal";
+import { SEARCHSTEPS } from "@/mocks/enums";
+import { ICountrySelectValueProps } from "@/types";
 
 interface IQueryProps extends StringifiableRecord {
   startDate?: string;
   endDate?: string;
-}
-
-enum STEPS {
-  LOCATION = 0,
-  DATE = 1,
-  INFO = 2,
 }
 
 export const SearchModal = () => {
@@ -34,7 +27,7 @@ export const SearchModal = () => {
   const searchModal = useSearchModal();
   const params = useSearchParams();
 
-  const [step, setStep] = useState(STEPS.LOCATION);
+  const [step, setStep] = useState(SEARCHSTEPS.LOCATION);
 
   const [location, setLocation] = useState<ICountrySelectValueProps>();
   const [guestCount, setGuestCount] = useState(1);
@@ -64,7 +57,7 @@ export const SearchModal = () => {
   }, []);
 
   const onSubmit = useCallback(async () => {
-    if (step !== STEPS.INFO) {
+    if (step !== SEARCHSTEPS.INFO) {
       return onNext();
     }
 
@@ -98,7 +91,7 @@ export const SearchModal = () => {
       { skipNull: true }
     );
 
-    setStep(STEPS.LOCATION);
+    setStep(SEARCHSTEPS.LOCATION);
     searchModal.onClose();
     router.push(url);
   }, [
@@ -115,7 +108,7 @@ export const SearchModal = () => {
   ]);
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.INFO) {
+    if (step === SEARCHSTEPS.INFO) {
       return "Search";
     }
 
@@ -123,7 +116,7 @@ export const SearchModal = () => {
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.LOCATION) {
+    if (step === SEARCHSTEPS.LOCATION) {
       return undefined;
     }
 
@@ -145,7 +138,7 @@ export const SearchModal = () => {
     </div>
   );
 
-  if (step === STEPS.DATE) {
+  if (step === SEARCHSTEPS.DATE) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
@@ -160,7 +153,7 @@ export const SearchModal = () => {
     );
   }
 
-  if (step === STEPS.INFO) {
+  if (step === SEARCHSTEPS.INFO) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading title="More information" subtitle="Find your perfect place!" />
@@ -197,7 +190,7 @@ export const SearchModal = () => {
       actionLabel={actionLabel}
       onSubmit={onSubmit}
       secondaryActionLabel={secondaryActionLabel}
-      secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
+      secondaryAction={step === SEARCHSTEPS.LOCATION ? undefined : onBack}
       onClose={searchModal.onClose}
     >
       {bodyContent}

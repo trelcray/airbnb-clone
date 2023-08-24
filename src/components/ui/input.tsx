@@ -3,8 +3,7 @@ import { FieldErrors } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError: FieldErrors;
   formatPrice?: boolean;
 }

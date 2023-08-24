@@ -1,6 +1,6 @@
 import { ListingCard } from "@/components/listings/listing-card";
 import { Container } from "@/components/ui/container";
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { SafeListing, SafeUser } from "@/types";
 
 interface IFavoritesClientProps {
