@@ -29,7 +29,7 @@ This is a repository for a Full Stack Airbnb Clone with Next.js 13 App Router: R
     ✓ Image gallery with responsive behavior.
     ✓ Adaptable and fluid text and spacing.
 
-#### Feactures
+#### Features
 
 - [x] Full responsiveness
 - [x] Credential authentication
@@ -45,9 +45,11 @@ This is a repository for a Full Stack Airbnb Clone with Next.js 13 App Router: R
 - [x] Owner reservation cancellation
 - [x] Creation and deletion of properties
 - [x] Pricing calculation
-- [x] Advanced search algorithm by category, date range, map location, number of guests, rooms and bathrooms
+- [x] Advanced search algorithm by category, date range, map location, number of guests, rooms, and bathrooms
 - [x] Favorites system
 - [x] Shareable URL filters
+- [x] Preparation of the site for friendly sharing with the insertion of Whatsapp, Facebook, and Twitter messages with a sharing image.
+- [x] Image optimization, clean and easy-to-understand code, and organized folder structure.
 - [ ] Edit properties
 - [ ] Edit profile
 - [ ] Automated testing
